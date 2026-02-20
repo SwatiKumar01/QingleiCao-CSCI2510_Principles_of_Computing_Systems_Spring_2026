@@ -1,0 +1,31 @@
+
+CSCI 2510 Studio – Hello World
+Swati Kumar
+February 17, 2026
+
+1. Header file needed for fprintf():
+#include <stdio.h>
+
+2. Difference between fprintf() and printf():
+fprintf() takes a FILE stream argument.
+printf() always prints to stdout.
+
+3. Section number for system calls:
+2
+
+4. Header file needed for write():
+#include <unistd.h>
+
+5. What happens if the third argument of write() is much larger?
+If the third argument of write() is made much larger than the string,
+the program prints random garbage characters after the message.
+This happens because write() prints exactly the number of bytes specified,
+even if it goes past the string buffer.
+
+6. When would you use a C library function vs a system call?
+A C library function should be used when portability and ease of use are important.
+Library functions work across different operating systems and provide a simpler interface.
+
+A system call should be used when low-level control or performance is needed.
+System calls interact directly with the operating system and are often used in systems programming.
+
