@@ -1,0 +1,23 @@
+1) Running `cat` with no arguments:
+`cat` echoes each line I type back to the terminal. It keeps reading from the keyboard until I send EOF with CTRL-D, then it exits.
+
+2) `cat < mars.txt`:
+Standard input is redirected from mars.txt, so `cat` prints the contents of mars.txt to the terminal and exits when it reaches EOF.
+
+3) `cat < mars.txt > new.txt` and open new.txt:
+Standard output is redirected to new.txt, so nothing prints to the terminal. new.txt is created/overwritten and contains a copy of mars.txt.
+
+4) `cat > new.txt`:
+`cat` reads from the keyboard and writes into new.txt. The file is overwritten with exactly what I typed. CTRL-D ends input.
+
+5) Using `>>` instead of `>`:
+`>>` appends instead of overwriting. Each time I run it, the new text is added to the end of the file.
+
+6) Header file for `read()` and `write()`:
+#include <unistd.h>
+
+7) `read()` return type and EOF value:
+Return type is `ssize_t`. EOF is indicated when `read()` returns 0.
+
+8) Does changing bufferSize affect correctness? What’s the tradeoff?
+Correctness does not change as long as the program writes only the number of bytes returned by `read()`. Small buffers are slower because they cause more system calls; larger buffers are usually faster but use more memory.
