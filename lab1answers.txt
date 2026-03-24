@@ -1,0 +1,71 @@
+Exercise 1 Output:
+PID: 87814
+PID: 87818
+PID: 87819
+
+Exercise 2 Output:
+PID: 88262
+PID: 88264
+
+Exercise 3:
+
+Parent PID: 88385
+Child PID:  88386
+
+Exercise 4:
+
+Parent PID: 88583
+Child PID: 88584
+Explanation:
+The child process is delayed because of sleep(3), so the parent may print first. If the program is run multiple times quickly, outputs can overlap and appear out of order because the parent does not wait for the child to finish.
+
+Exercise 5:
+
+Child PID: 88684
+Parent PID: 88683
+
+Explanation:
+The parent process uses waitpid() to wait for the child process to finish before continuing. This ensures the child prints first, and the output is in the correct order without overlapping.
+
+Exercise 6:
+
+total 96
+-rwxr-xr-x   1 swatiscomputer  staff  33601 Mar 24 16:16 fork
+-rw-r--r--   1 swatiscomputer  staff    294 Mar 24 16:16 fork.c
+drwxr-xr-x  13 swatiscomputer  staff    416 Mar 24 15:57 lab-1-run-length-compression
+drwxr-xr-x   4 swatiscomputer  staff    128 Mar 24 15:57 lab-2-slu-shell-slush
+-rw-r--r--   1 swatiscomputer  staff    688 Mar 24 16:17 lab1answers.txt
+-rw-r--r--   1 swatiscomputer  staff     65 Mar 24 15:57 README.md
+drwxr-xr-x   5 swatiscomputer  staff    160 Mar 24 15:57 studio-0-shell
+drwxr-xr-x   6 swatiscomputer  staff    192 Mar 24 15:57 studio-1-hello-world
+drwxr-xr-x   5 swatiscomputer  staff    160 Mar 24 15:57 studio-2-input-output
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-3-pointers
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-4-error-checking
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-5-fork-exec
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-6-input-parsing-with-strtok
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-7-pipes-and-redirection
+drwxr-xr-x   5 swatiscomputer  staff    160 Mar 24 15:57 studio-8-signals
+
+Exercise 7:
+
+total 96
+-rwxr-xr-x   1 swatiscomputer  staff  33729 Mar 24 16:19 fork
+-rw-r--r--   1 swatiscomputer  staff    363 Mar 24 16:18 fork.c
+drwxr-xr-x  13 swatiscomputer  staff    416 Mar 24 15:57 lab-1-run-length-compression
+drwxr-xr-x   4 swatiscomputer  staff    128 Mar 24 15:57 lab-2-slu-shell-slush
+-rw-r--r--   1 swatiscomputer  staff   1857 Mar 24 16:18 lab1answers.txt
+-rw-r--r--   1 swatiscomputer  staff     65 Mar 24 15:57 README.md
+drwxr-xr-x   5 swatiscomputer  staff    160 Mar 24 15:57 studio-0-shell
+drwxr-xr-x   6 swatiscomputer  staff    192 Mar 24 15:57 studio-1-hello-world
+drwxr-xr-x   5 swatiscomputer  staff    160 Mar 24 15:57 studio-2-input-output
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-3-pointers
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-4-error-checking
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-5-fork-exec
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-6-input-parsing-with-strtok
+drwxr-xr-x   3 swatiscomputer  staff     96 Mar 24 15:57 studio-7-pipes-and-redirection
+drwxr-xr-x   5 swatiscomputer  staff    160 Mar 24 15:57 studio-8-signals
+
+Parent PID: 88803
+
+Explanation:
+The child process uses execvp() to replace itself with the "ls -l" program and execute it. The parent process waits for the child to finish using waitpid(), and then prints its PID.
