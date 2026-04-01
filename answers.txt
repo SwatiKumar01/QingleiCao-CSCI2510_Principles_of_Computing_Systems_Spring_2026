@@ -1,0 +1,37 @@
+1. Output of fgets program:
+Enter input: hello world
+hello world
+
+2. Difference between strtok calls:
+The first call to strtok uses the original string, while subsequent calls use NULL to continue parsing the same string.
+
+3. Delimiter character:
+A space (" ")
+
+4. First token output:
+hello
+
+5. All tokens output:
+hello
+world
+test
+
+6. cmd assignment:
+cmd = strtok(input_string, " ");
+
+7. my_argv code:
+my_argv[0] = cmd;
+
+int i = 1;
+char* res;
+
+while ((res = strtok(NULL, " ")) != NULL) {
+    my_argv[i] = res;
+    i++;
+}
+
+my_argv[i] = NULL;
+
+8. execvp output:
+Enter input: echo hello
+hello
