@@ -1,0 +1,45 @@
+Program 1 code:
+#include <stdio.h>
+
+int main() {
+    printf("Hello from Program 1\n");
+    return 0;
+}
+
+Program 2 code:
+#include <stdio.h>
+
+int main() {
+    char input[100];
+
+    while (1) {
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            break;
+        }
+        printf("Program 2 got: %s", input);
+    }
+
+    return 0;
+}
+
+Output without pipe:
+Hello from Program 1
+(program hangs, had to press Ctrl+C)
+
+Pipe ends:
+fd[0] = read end
+fd[1] = write end
+
+dup2 explanation:
+dup2 closes the second argument and replaces it with the first
+
+dup2 code:
+dup2(fd[1], STDOUT_FILENO);
+dup2(fd[0], STDIN_FILENO);
+
+Output with pipe:
+Program 2 got: Hello from Program 1
+
+Advantages:
+1. Programs don’t need to know where data comes from
+2. Allows flexible redirection like files, pipes, or networks
