@@ -1,37 +1,51 @@
-1. Output of fgets program:
-Enter input: hello world
-hello world
+1. Output from sleep.c:
+^C
 
-2. Difference between strtok calls:
-The first call to strtok uses the original string, while subsequent calls use NULL to continue parsing the same string.
+2. SIGINT:
+Signal number: 2
+Description: Interrupt from keyboard
 
-3. Delimiter character:
-A space (" ")
+3. Sending SIGINT with kill:
+The sleeper process terminated when the SIGINT signal was sent using the kill command.
 
-4. First token output:
-hello
+4. Another signal:
+Signal used: SIGTERM (15)
+Result: The process terminated.
 
-5. All tokens output:
-hello
-world
-test
+5. call_sleeper behavior (before handler):
+Both the sleeper and the caller terminated when CTRL-C was pressed. The success message was not printed.
 
-6. cmd assignment:
-cmd = strtok(input_string, " ");
+6. Signal handling code:
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <signal.h>
 
-7. my_argv code:
-my_argv[0] = cmd;
-
-int i = 1;
-char* res;
-
-while ((res = strtok(NULL, " ")) != NULL) {
-    my_argv[i] = res;
-    i++;
+void handle_sigint(int signum) {
+    printf("Ignoring SIGINT\n");
 }
 
-my_argv[i] = NULL;
+int main() {
+    signal(SIGINT, handle_sigint);
 
-8. execvp output:
-Enter input: echo hello
-hello
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        execl("./sleep", "sleep", NULL);
+    } else {
+        wait(NULL);
+        printf("Successfully waited for child\n");
+    }
+
+    return 0;
+}
+
+7. Final output:
+Ignoring SIGINT
+Successfully waited for child
+
+8. Example use of signals:
+Signal handling is useful for handling timeouts, such as using SIGALRM to terminate a program after a certain period of time.
+
+9. (Optional) Terminal behavior:
+When pressing CTRL-C in an empty terminal, nothing happens because the shell ignores SIGINT to prevent itself from terminating.
