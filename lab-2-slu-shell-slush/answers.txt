@@ -1,0 +1,7 @@
+Known Bugs:
+- Limited to 15 arguments per command
+- Limited pipeline length
+- Basic syntax error handling
+
+Extra Credit:
+- None
