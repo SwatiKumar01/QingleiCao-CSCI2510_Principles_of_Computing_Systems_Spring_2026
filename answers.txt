@@ -1,51 +1,41 @@
-1. Output from sleep.c:
-^C
+1. What is the return type and expected arguments for the thread entry function?
 
-2. SIGINT:
-Signal number: 2
-Description: Interrupt from keyboard
+Return type: void*
+Expected argument: void*
 
-3. Sending SIGINT with kill:
-The sleeper process terminated when the SIGINT signal was sent using the kill command.
+2. Program output for creating one thread:
 
-4. Another signal:
-Signal used: SIGTERM (15)
-Result: The process terminated.
+Hello from thread!
+Thread finished.
 
-5. call_sleeper behavior (before handler):
-Both the sleeper and the caller terminated when CTRL-C was pressed. The success message was not printed.
+3. Struct definition:
 
-6. Signal handling code:
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <signal.h>
+struct thread_args
+{
+    int arg1;
+    char arg2[100];
+    int ret;
+};
 
-void handle_sigint(int signum) {
-    printf("Ignoring SIGINT\n");
-}
+4. Program output when passing struct values:
 
-int main() {
-    signal(SIGINT, handle_sigint);
+thread arg1: 25
+thread arg2: Hello thread
+Returned value: 999
 
-    pid_t pid = fork();
+5. Program output for five threads:
 
-    if (pid == 0) {
-        execl("./sleep", "sleep", NULL);
-    } else {
-        wait(NULL);
-        printf("Successfully waited for child\n");
-    }
+Thread 0 says: This is thread 0
+Main got ret from thread 0 = 0
+Thread 3 says: This is thread 3
+Thread 1 says: This is thread 1
+Thread 4 says: This is thread 4
+Thread 2 says: This is thread 2
+Main got ret from thread 1 = 10
+Main got ret from thread 2 = 20
+Main got ret from thread 3 = 30
+Main got ret from thread 4 = 40
 
-    return 0;
-}
+6. What do you notice about the output ordering? Why?
 
-7. Final output:
-Ignoring SIGINT
-Successfully waited for child
-
-8. Example use of signals:
-Signal handling is useful for handling timeouts, such as using SIGALRM to terminate a program after a certain period of time.
-
-9. (Optional) Terminal behavior:
-When pressing CTRL-C in an empty terminal, nothing happens because the shell ignores SIGINT to prevent itself from terminating.
+The output ordering changes between runs. Threads execute concurrently, and the operating system scheduler decides which thread runs first, so the order is not guaranteed.
