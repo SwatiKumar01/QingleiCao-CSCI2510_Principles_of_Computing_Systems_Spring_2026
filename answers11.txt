@@ -1,0 +1,51 @@
+1. Output from sleep.c:
+^C
+
+2. SIGINT:
+Signal number: 2
+Description: Interrupt from keyboard
+
+3. Sending SIGINT with kill:
+The sleeper process terminated when the SIGINT signal was sent using the kill command.
+
+4. Another signal:
+Signal used: SIGTERM (15)
+Result: The process terminated.
+
+5. call_sleeper behavior (before handler):
+Both the sleeper and the caller terminated when CTRL-C was pressed. The success message was not printed.
+
+6. Signal handling code:
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <signal.h>
+
+void handle_sigint(int signum) {
+    printf("Ignoring SIGINT\n");
+}
+
+int main() {
+    signal(SIGINT, handle_sigint);
+
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        execl("./sleep", "sleep", NULL);
+    } else {
+        wait(NULL);
+        printf("Successfully waited for child\n");
+    }
+
+    return 0;
+}
+
+7. Final output:
+Ignoring SIGINT
+Successfully waited for child
+
+8. Example use of signals:
+Signal handling is useful for handling timeouts, such as using SIGALRM to terminate a program after a certain period of time.
+
+9. (Optional) Terminal behavior:
+When pressing CTRL-C in an empty terminal, nothing happens because the shell ignores SIGINT to prevent itself from terminating.
