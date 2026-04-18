@@ -1,0 +1,57 @@
+1. Copy and paste these functions:
+
+void* adder(void* arg) {
+    for (int i = 0; i < 2000000; i++) {
+        race++;
+    }
+    return NULL;
+}
+
+void* subtractor(void* arg) {
+    for (int i = 0; i < 2000000; i++) {
+        race--;
+    }
+    return NULL;
+}
+
+2. What would happen if executed directly in main()?
+
+If the functions are called one after another directly in main(), the final value should be 0 because the increments and decrements happen sequentially.
+
+3. What happens if executed simultaneously by threads?
+
+The variable race will likely not be 0 because both threads modify it at the same time.
+
+4. Several executions:
+
+Final value of race: 180011
+Final value of race: 535928
+Final value of race: 1172906
+
+5. Explain the behavior:
+
+This happens because of a race condition. The two threads are reading and writing the same shared variable without synchronization, causing lost updates.
+
+6. Maximum or minimum possible value:
+
+The result could be positive or negative depending on thread timing. In theory it could vary widely.
+
+7. Lower iterations:
+
+With fewer iterations, race conditions still happen but may appear less often. With only 1000 iterations, some runs may end at 0.
+
+8. Could it happen on one processor core?
+
+Yes. Even on one core, threads can be interleaved by the operating system scheduler.
+
+9. taskset -c 0 ./race_program:
+
+The race condition can still occur even when restricted to one core.
+
+10. 200,000,000 operations on one core:
+
+The race condition becomes more visible because there are many more opportunities for context switching.
+
+11. Reasonable explanation:
+
+Even on one processor, threads switch rapidly. Since race++ and race-- are not atomic operations, incorrect results still occur.
