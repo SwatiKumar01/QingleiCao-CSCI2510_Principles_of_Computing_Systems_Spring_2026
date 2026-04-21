@@ -6,6 +6,7 @@ Name: Swati Kumar
 pthread_mutex_t mutex;
 pthread_mutex_init(&mutex, NULL);
 
+
 2. What did you expect after synchronization?
 
 I expected the final value to be 0 because one thread adds
@@ -13,25 +14,31 @@ I expected the final value to be 0 because one thread adds
 I expected the program to take longer because locking and
 unlocking a mutex adds overhead.
 
+
 3. Sample outputs:
 
 Final value: 0
 Final value: 0
 Final value: 0
 
+
 4. Original racy program timings (20,000,000 iterations):
 
 Run 1: 0.300 sec
 Run 2: 0.012 sec
 Run 3: 0.012 sec
+
 Average: 0.108 sec
+
 The final value changed every run and was not 0, showing data corruption caused by race conditions.
+
 
 5. Corrected program with lock/unlock every iteration:
 
 Run 1: 0.762 sec
 Run 2: 0.490 sec
 Run 3: 0.522 sec
+
 Average: 0.591 sec
 
 This took longer because each thread performs millions of lock and unlock operations. The mutex adds synchronization overhead.
@@ -47,9 +54,11 @@ Average: 0.213 sec
 
 This version was much faster than locking every iteration because only two total mutex lock/unlock operations were used.
 
+
 7. Why are the results different?
 
 Per-iteration locking causes much higher overhead because the mutex is locked and unlocked millions of times. Locking once per thread greatly reduces synchronization cost.
+
 
 8. When is each strategy appropriate?
 
