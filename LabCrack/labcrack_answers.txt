@@ -1,0 +1,108 @@
+CSCI 2510 - Lab Crack Answers
+
+Name: Swati Kumar
+
+1. What four-letter password corresponds to the target hash 'abccBcrPOxnLU'?
+
+Answer:
+pass
+
+2. What five-letter password corresponds to the target hash 'xyxMB6gxuiBZg'?
+
+Answer:
+ferry
+
+3. Time to exhaustively search all passwords up to length five for hash 'nomatchingpass'
+
+Threads: 1
+Time: 39.592 seconds
+
+Threads: 2
+Time: 39.905 seconds
+
+Threads: 4
+Time: 40.939 seconds
+
+Threads: 8
+Time: 40.911 seconds
+
+Threads: 13
+Time: 40.185 seconds
+
+Threads: 26
+Time: 39.851 seconds
+
+4. Hash Rates
+
+Total passwords checked up to length five:
+26 + 676 + 17,576 + 456,976 + 11,881,376 = 12,356,630
+
+Hash Rate = Total Hashes / Time
+
+2 threads:
+12,356,630 / 39.905 = 309,644 hashes/sec
+
+4 threads:
+12,356,630 / 40.939 = 301,831 hashes/sec
+
+8 threads:
+12,356,630 / 40.911 = 302,038 hashes/sec
+
+13 threads:
+12,356,630 / 40.185 = 307,470 hashes/sec
+
+26 threads:
+12,356,630 / 39.851 = 310,063 hashes/sec
+
+5. Interpretation of Results
+
+The program did not scale significantly when more threads were added. Two threads were not twice as fast, and eight threads were not eight times as fast. This likely happened because GitHub Codespaces limits available CPU resources. Additional threads created overhead and context switching instead of major speed improvements.
+
+6. Maximum Hash Rate
+
+Approximately 310,063 hashes per second.
+
+7. Total Hashes Needed to Exhaustively Search Keysizes 1 Through 8
+
+Keysize 1: 26
+Keysize 2: 702
+Keysize 3: 18,278
+Keysize 4: 475,254
+Keysize 5: 12,356,630
+Keysize 6: 321,272,406
+Keysize 7: 8,353,082,582
+Keysize 8: 217,180,147,158
+
+8. Estimated Time to Search Each Keyspace at Maximum Rate
+
+Keysize 1: Instant
+Keysize 2: Instant
+Keysize 3: Instant
+Keysize 4: About 1.5 seconds
+Keysize 5: About 40 seconds
+Keysize 6: About 17 minutes
+Keysize 7: About 7.5 hours
+Keysize 8: About 8 days
+
+9. Benefit of Increasing Key Length
+
+Increasing password length greatly improves security because the number of possible passwords grows exponentially. Each added character multiplies the number of guesses required.
+
+10. Exhaustive Search Time for 6-Character Passwords with Larger Character Sets
+
+52 characters (uppercase + lowercase):
+52^6 = 19.7 billion combinations
+About 17.7 hours
+
+62 characters (letters + digits):
+62^6 = 56.8 billion combinations
+About 50.9 hours
+
+93 characters (letters + digits + symbols):
+93^6 = 646 billion combinations
+About 24 days
+
+11. Known Bugs / Deviations
+
+The program was tested in GitHub Codespaces, which may restrict CPU performance and reduce multithreading speedup.
+
