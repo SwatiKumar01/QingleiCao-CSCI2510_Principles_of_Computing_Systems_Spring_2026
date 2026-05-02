@@ -1,46 +1,34 @@
-# Deadlock Detection (CSCI 2510)
+Deadlock Detection Program (CSCI 2510)
 
-## Overview
+This program simulates how processes request and release resources and checks for deadlock using a resource allocation graph.
 
-This program detects deadlock in a system using a Resource Allocation Graph (RAG).
-Processes request and release resources, and the program checks for cycles after each request.
+Each process can either acquire or release a resource. When a process requests a resource that is already being used, it has to wait. The program keeps track of these relationships and checks for cycles in the graph. If a cycle is found, that means a deadlock has occurred.
 
-## How It Works
+To detect deadlock, the program uses a depth-first search (DFS). It starts from a process and follows the chain of requests and allocations. If it reaches the same process again, a cycle exists.
 
-* PROCESS → RESOURCE = waiting
-* RESOURCE → PROCESS = holding
-* Uses Depth-First Search (DFS) to detect cycles
-* If a cycle is found, the program prints the cycle and exits with -1
-
-## Compilation
-
+How to compile:
 gcc deadlock.c -o deadlock
 
-## Usage
-
+How to run:
 ./deadlock < test1.txt
 
-## Example Input
-
+Example input:
 0 a 0
 1 a 1
 0 a 1
 1 a 0
 
-## Example Output
-
+Example output:
 PROCESS 1 -> RESOURCE 0
 RESOURCE 0 -> PROCESS 0
 PROCESS 0 -> RESOURCE 1
 RESOURCE 1 -> PROCESS 1
 
-## Notes
+Notes:
 
-* Maximum of 15 processes and 15 resources
-* Program exits immediately when deadlock is detected
+* The program supports up to 15 processes and 15 resources
+* It stops immediately when deadlock is detected
 * If no deadlock occurs, the program exits normally
 
-## Author
+Author: Swati Kumar
 
-Swati Kumar
-# QingleiCao-CSCI2510_Principles_of_Computing_Systems_Spring_2026
